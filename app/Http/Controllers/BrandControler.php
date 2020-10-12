@@ -9,42 +9,54 @@ use Illuminate\Support\Facades\DB;
 
 class BrandControler extends Controller
 {
+
+    function index(){
+        $brands =Brand::all();
+         return view("brands.index")->with(compact("brands"));
+        // return view("brands.index")->with("brands" ,$brands);
+    }
     function store(Request $request){
         
         // validate
         $request->validate([
-            "name" => "required|min:3|max:100",
-            "info" => "nullable|min:3|max:100",
+            "name" => "required|max:100",
+            "comments" => "nullable|min:3|max:1000",
         ]);
 
-        // $name =$request->name;
-        // $rslt =DB::insert("insert into brands(name)values('$name')");
-        // $rslt =DB::delete("delete from brands where id=20");
-        // $rslt =DB::table("brands")->insert(["name"=>$request->name]);
-        // $rslt =DB::table("brands")->insert($request->except("_token"));
-        // $rslt =DB::table("brands")->where("id" ,18)->delete();
-        // $rslt =DB::table("brands")->where("id" ,19)->update(["name" =>$request->name]);
-        // dd($rslt);
+        $b = new Brand();
+        $b->name =$request->name;
+        $b->comments =$request->comments;
+        $b->save();
+      
+        return redirect()->back();
+        // return redirect("/brand");
+        // return redirect()->route("brand"); 
+        // return redirect()->action([BrandControler::class ,"index"]);
 
-
-        // dd(DB::table("brands")->get());
-
-        //insert 
-        // $brand = new Brand();
-        // $brand->name =$request->name;
-        // $brand->info =$request->info;
-        // $brand->save();
-        // dd($brand);
-        //select all
-        // dd(Cat::all());
-
-        //update
-        // $b = Brand::find(8);
-        // $b->name = "ahmed Tea";     
-        // $b->save();
-        //delete
-        // $b = Brand::find(9);
+    }
+    function delete($id){
+        // $b =Brand::find($id);
         // $b->delete();
-        Brand::destroy([10,15,16]);
+        Brand::destroy($id);
+        return redirect("/brand");
+    }
+
+    function edit($id){
+        $b =Brand::find($id);
+        return view("brands.edit")->with("brand" ,$b);
+    }
+    function update(Request $request , $id){
+         
+        // validate
+        $request->validate([
+            "name" => "required|max:100",
+            "comments" => "nullable|min:3|max:1000",
+        ]);
+        
+        $b =Brand::find($id);
+        $b->name =$request->name;
+        $b->comments =$request->comments;
+        $b->save();
+        return redirect("/brand");
     }
 }

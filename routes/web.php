@@ -18,14 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::view("/" ,"welcome");
 Route::view("/home" ,"home");
-// Route::view("/contacts" ,"contacts" ,["dept"=>"Sections" ,"data"=>"Please Enter Your Information"]);
-Route::get("/contacts" , [TestController::class ,"xxx"]);
-Route::get("/hello/{fname}/{mname}/{lname?}" ,[TestController::class ,"hello"])->where(["fname"=>"[a-zA-Z]+" ,"mname"=>"[a-z]+"  , "lname"=>"[a-z]+"]);
-Route::get("/show" ,[TestController::class ,"show"] );
-// Route::get("/show" ,"App\Http\Controllers\TestController@show" );
-// Route::get("/sum/{x?}/{y?}" ,[TestController::class ,"sum"] )->where("x","[0-9]+")->where("y","[0-9]+");
-Route::get("/sum/{x?}/{y?}" ,[TestController::class ,"sum"] )->where(["x"=>"[0-9]+" , "y"=>"[0-9]+"]);
-Route::get("/aaa" ,[TestController::class ,"test"]);
+Route::view("/contacts" ,"contacts");
 
-Route::view("/brand" ,"brands.index");
+Route::get("/brand" ,[BrandControler::class ,"index"])->name("brand");
+Route::get("/brand/delete/{id}" ,[BrandControler::class ,"delete"])->name("brand_delete");
+Route::get("/brand/edit/{id}" ,[BrandControler::class ,"edit"])->name("brand_edit");
+Route::post("/brand/edit/{id}" ,[BrandControler::class ,"update"]);
 Route::post("/brand" ,[BrandControler::class ,"store"]);

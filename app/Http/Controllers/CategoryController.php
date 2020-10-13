@@ -40,6 +40,7 @@ class CategoryController extends Controller
         $request->validate(["name"=>"required"]);
         $cat = new Category();
         $cat->name = $request->name;
+        $cat->category_id = $request->category_id;
         $cat->save();
         return redirect()->route("category.index");
     }
@@ -79,6 +80,7 @@ class CategoryController extends Controller
         $request->validate(["name"=>"required"]);
        
         $category->name = $request->name;
+        $category->category_id = $request->category_id;
         $category->save();
         return redirect()->route("category.index");
     }

@@ -4,6 +4,7 @@
         <div class="row mt-5">
             <div class="col-md-5">
                 <h3>Category {{$category->name}}</h3>
+                <h5 class="mb-4"> {{($category->main_category )?$category->main_category->name :""}}</h5>
                 <form action="/category/{{$category->id}}" method="POST">
                     @csrf
                     @method("delete")

@@ -35,6 +35,17 @@
                 <a class="dropdown-item" href="/category">Show All Categories</a>
               </div>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Products
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/product/create">Add New Product</a>
+                
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/product">Show All Products</a>
+              </div>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/contacts" tabindex="-1" aria-disabled="true">Contact Us</a>
             </li>

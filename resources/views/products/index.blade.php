@@ -3,36 +3,32 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col">
-                <h3>All Categories</h3>
+                <h3>All Products</h3>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Price</th>
+                            <th>Quentity</th>
                             <th>Category</th>
-                            <th>Count Products</th>
+                            <th>Brand</th>                            
+                            <th></th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($categories as $category)
+                        @forelse ($products as $product)
                         <tr>
-                            <td><a href="/category/{{$category->id}}" class="btn-link"> {{$category->name}}</a></td>
-                            <td>
-                                {{-- @php
-                                    $c =\App\Models\Category::find($category->category_id);
-                                    if($c){
-                                        echo $c->name;
-                                    }
-                                @endphp --}}
-                                    {{-- {{var_dump($category->sub_categories)}} --}}
-                                    {{($category->main_category )?$category->main_category->name :""}}
-                            </td>
-                            <td>{{$category->products->count()}}</td>
+                            <td><a href="/product/{{$product->id}}" class="btn-link"> {{$product->name}}</a></td>
+                            <td>{{$product->price}}</td>
+                            <td>{{$product->qty}}</td>
+                            <td>{{$product->category->name}}</td>
+                            <td>{{($product->brand)? $product->brand->name :""}}</td>
                             <td style="width: 50px">
-                                <a class="btn btn-success btn-sm" href=" /category/{{$category->id}}/edit" >edit</a>
+                                <a class="btn btn-success btn-sm" href=" /product/{{$product->id}}/edit" >edit</a>
                             </td>
                             <td style="width: 50px">
-                                <form action="/category/{{$category->id}}" method="POST">
+                                <form action="/product/{{$product->id}}" method="POST">
                                     @csrf
                                     @method("delete")
                                     <input type="submit" class="btn btn-sm btn-danger" value="delete">

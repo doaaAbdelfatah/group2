@@ -14,6 +14,16 @@
                         <small  class="text-danger">{{$message}}</small>
                     @enderror
                     </div>
+                    <div class="form-group mt-4">
+                        <label for="">Category</label>
+                        <select name="category_id" class="form-control">
+                            <option></option>
+                            @foreach (\App\Models\Category::all() as $cat)
+                                <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            @endforeach
+                        </select>
+                     
+                      </div>
   
                     <input class="btn btn-primary" type="submit" value="Save">
                 </form>

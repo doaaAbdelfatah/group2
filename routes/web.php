@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandControler;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,13 @@ Route::get("/brand/edit/{id}" ,[BrandControler::class ,"edit"])->name("brand_edi
 Route::post("/brand/edit/{id}" ,[BrandControler::class ,"update"]);
 Route::post("/brand" ,[BrandControler::class ,"store"]);
 
-Route::resource("/category" ,CategoryController::class);
+Route::resource("/category" ,CategoryController::class); 
+// 7 routes (index ,create ,store,show,edit,update,destory)
+
+// Route::resource("/category" ,CategoryController::class)->only(["index" ,"create" ,"store"]);
+// 3 routes  (index ,create ,store)
+
+// Route::resource("/category" ,CategoryController::class)->except(["show","edit","update"]);
+// 4 routes  (index ,create ,store ,destory)
+
+Route::resource("/product" ,ProductController::class); 

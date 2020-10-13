@@ -20,8 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->foreign("category_id")->references("id")->on("categories")->onDelete("cascade");
             $table->timestamps();
         });
-    }
- 
+    } 
     public function down()
     {
         Schema::dropIfExists('categories');

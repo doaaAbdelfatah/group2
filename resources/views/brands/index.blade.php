@@ -4,6 +4,7 @@
         <div class="row mt-5">
             <div class="col-md-5">
                 <h3>Manage Brands</h3>
+               
                 <form method="POST" action="/brand">
                     @csrf                    
                     <div class="form-group mt-4">
@@ -27,11 +28,17 @@
         </div>
         <div class="row mt-5">
             <div class="col">
+                @if (session()->has("error"))
+                <small class="text-danger">
+                    {{session()->pull("error")}}
+                </small>
+                @endif
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Commments</th>
+                            <th>Categories</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -39,7 +46,16 @@
                         @forelse ($brands as $brand)
                         <tr>
                             <td>{{$brand->name}}</td>
-                            <td>{{$brand->comments}}</td>                            
+                            <td>{{$brand->comments}}</td>  
+                            <td>
+                                <ul>
+                                    @forelse ($brand->categories->unique() as $cat)
+                                        <li>{{$cat->name}}</li>
+                                    @empty
+                                        <li>No Categories</li>
+                                    @endforelse
+                                </ul>
+                            </td>                          
                             {{-- <td><a class="btn btn-sm btn-danger" href="/brand/delete/{{$brand->id}}" >delete</a></td>                          --}}
                             <td>
                                 <a class="btn btn-sm btn-success" href="{{route("brand_edit" ,["id"=>$brand->id])}}" >edit</a>

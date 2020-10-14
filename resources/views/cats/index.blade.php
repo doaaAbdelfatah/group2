@@ -4,11 +4,17 @@
         <div class="row mt-5">
             <div class="col">
                 <h3>All Categories</h3>
+                @if (session()->has("error"))
+                    <small class="text-danger">
+                        {{session()->get("error")}}
+                    </small>
+                @endif
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Category</th>
+                            <th>Brands</th>
                             <th>Count Products</th>
                             <th>&nbsp;</th>
                         </tr>
@@ -26,6 +32,15 @@
                                 @endphp --}}
                                     {{-- {{var_dump($category->sub_categories)}} --}}
                                     {{($category->main_category )?$category->main_category->name :""}}
+                            </td>
+                            <td>
+                                <ul>
+                                    @forelse ($category->brands->unique() as $b)
+                                        <li>{{$b->name}}</li>
+                                    @empty
+                                        <li>No Brnads</li>
+                                    @endforelse
+                                </ul>
                             </td>
                             <td>{{$category->products->count()}}</td>
                             <td style="width: 50px">

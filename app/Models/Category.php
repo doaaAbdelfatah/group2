@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
+    protected $fillable =["name" ,"category_id"];
     // 1 to many  (hasMany - belongsTo)
+    
     function sub_categories(){
         return $this->hasMany(Category::class);
     }
@@ -20,5 +21,9 @@ class Category extends Model
 
     function products(){        
         return $this->hasMany(Product::class ,"category_id" ,"id");
+    }
+
+    function brands(){
+        return $this->belongsToMany(Brand::class , Product::class);
     }
 }

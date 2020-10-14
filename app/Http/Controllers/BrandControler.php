@@ -35,9 +35,15 @@ class BrandControler extends Controller
 
     }
     function delete($id){
+        $b =Brand::find($id);
+        if ($b->products->count()==0){
+            $b->delete();
+        }else{
+            session()->put("error" ,"Can't Delete ".$b->name. " Brand it has related record");
+        }
         // $b =Brand::find($id);
         // $b->delete();
-        Brand::destroy($id);
+        // Brand::destroy($id);
         return redirect("/brand");
     }
 

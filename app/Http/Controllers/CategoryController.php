@@ -93,7 +93,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        if ($category->products->count()==0){
+            $category->delete();
+        }else{
+            session()->flash("error" ,"Can't Delete ".$category->name. " Category it has related record");
+        }
+        
         return redirect()->route("category.index");
     }
 }

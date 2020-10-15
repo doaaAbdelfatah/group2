@@ -33,6 +33,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -44,6 +45,10 @@ class User extends Authenticatable
 
     function products(){        
         return $this->hasMany(Product::class );
+    }
+
+    function contacts(){
+        return $this->morphMany(Contact::class ,"account");
     }
 
 }

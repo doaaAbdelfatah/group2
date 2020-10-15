@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\BrandControler;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TestController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,3 +42,28 @@ Route::resource("/category" ,CategoryController::class);
 // 4 routes  (index ,create ,store ,destory)
 
 Route::resource("/product" ,ProductController::class); 
+
+Route::resource("/supplier" ,SupplierController::class); 
+Route::resource("/contact_types" ,ContactController::class); 
+// Route::resource("/contact" ,ContactController::class); 
+
+Route::prefix("/contact")->group(function(){
+    Route::get("create/{id}/{type}" ,[ContactController::class ,"create"]);
+    Route::post("{id}/{type}" ,[ContactController::class ,"store"]);
+});
+
+
+Route::view("/users" ,"users")->name("user.index");
+
+Route::post("/lang" ,function (Request $request){
+    // if($request->l =="ar")
+    // {
+        // App::setLocale("ar");
+    // }else App::setLocale("en");
+
+    // echo __("messages.Brand");
+//    var_dump($request->l);
+    session()->put("locale" ,$request->l);
+    
+    return redirect()->back();
+});

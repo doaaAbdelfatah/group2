@@ -6,7 +6,8 @@
                 <h3>Edit Product {{$product->name}}</h3>
             <form method="POST" action="/product/{{$product->id}}">
                     @csrf 
-                    @method("put")                   
+                    {{-- @method("put")                    --}}
+                    @method("patch")                   
                     <div class="form-group mt-4">
                       <label for="">Name</label>
                     <input type="text" name="name" class="form-control" value="{{$product->name}}" placeholder="Product Name">

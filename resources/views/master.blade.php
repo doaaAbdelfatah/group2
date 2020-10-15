@@ -1,13 +1,18 @@
+{{-- @php
+    if(session()->has("locale")){
+      App::setLocale(session()->get("locale"));
+    }
+@endphp --}}
+
 <!doctype html>
-<html lang="en">
+<html lang="{{App::getLocale()}}" dir="@lang('messages.dir')">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+    @lang('messages.bootstrap')
     <title>Hello, world!</title>
   </head>
   <body>
@@ -19,41 +24,56 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/home"> @lang('messages.Home') <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/brand">Brand</a>
+              <a class="nav-link" href="/brand">@lang('messages.Brand')</a>
+            </li>  <li class="nav-item">
+              <a class="nav-link" href="/users">@lang('messages.Users')</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categories
+                {{__("messages.Categories")}} 
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/category/create">Add New Category</a>
+                <a class="dropdown-item" href="/category/create">@lang('messages.Add New Category')</a>
                 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/category">Show All Categories</a>
+                <a class="dropdown-item" href="/category">@lang('messages.Show All Categories')</a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Products
+                @lang('data.Products')
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/product/create">Add New Product</a>
+                <a class="dropdown-item" href="/product/create">@lang('messages.Add New Product')</a>
                 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/product">Show All Products</a>
+                <a class="dropdown-item" href="/product">@lang('messages.Show All Products') </a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @lang('messages.Suppliers')
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/supplier/create">@lang('messages.Add New Supplier')</a>
+                
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/supplier">@lang('messages.Show All Suppliers')</a>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contacts" tabindex="-1" aria-disabled="true">Contact Us</a>
+              <a class="nav-link" href="/contacts" tabindex="-1" aria-disabled="true">@lang('messages.Contact Us') </a>
             </li>
           </ul>
       
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <form class="form-inline my-2 my-lg-0" method="POST" action="/lang">
+            @csrf
+            <button class="btn btn-outline-primary my-2 my-sm-0" name="l" value="en" type="submit">English</button>
+            &nbsp;
+            <button class="btn btn-outline-success my-2 my-sm-0" name="l" value="ar" type="submit">اللغه العربية</button>
           </form>
         </div>
       </nav>

@@ -1,9 +1,15 @@
+{{-- @php
+    if(session()->has("locale")){
+      App::setLocale(session()->get("locale"));
+    }
+@endphp --}}
+
 @extends('master')
 @section('content')
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-5">
-                <h3>Manage Brands</h3>
+                <h3>@lang('messages.Manage Brands') </h3>
                
                 <form method="POST" action="/brand">
                     @csrf                    

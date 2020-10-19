@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -49,6 +51,16 @@ class ProductController extends Controller
         $product->category_id =$request->category_id;
         $product->brand_id =$request->brand_id;
         $product->save();
+
+        $files = $request->file("imgs");
+        foreach($files as $file){
+          $img_name = Storage::disk("public")->put("product_images" ,$file); 
+          $pi = new ProductImage();
+          $pi->img = $img_name;         
+          $pi->product_id =  $product->id;
+          $pi->save();
+        }
+      
         
         return redirect()->route("product.index");
     }

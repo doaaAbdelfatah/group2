@@ -4,7 +4,7 @@
         <div class="row mt-5">
             <div class="col-md-5">
                 <h3>Add New Product</h3>
-                <form method="POST" action="/product">
+                <form method="POST" action="/product" enctype="multipart/form-data">
                     @csrf                    
                     <div class="form-group mt-4">
                       <label for="">Name</label>
@@ -48,6 +48,15 @@
                             @endforeach
                         </select>
                      
+                      </div>
+
+                      <div class="form-group mt-4">
+                        <label for="">Product Images</label>
+                      <input type="file" multiple name="imgs[]" class="form-control">
+                      
+                            @error('imgs')
+                                <small  class="text-danger">{{$message}}</small>
+                            @enderror
                       </div>
   
                     <input class="btn btn-primary" type="submit" value="Save">

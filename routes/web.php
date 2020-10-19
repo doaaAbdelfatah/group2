@@ -4,8 +4,11 @@ use App\Http\Controllers\BrandControler;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TestController;
+use App\Http\Middleware\AgeCheck;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +45,11 @@ Route::resource("/category" ,CategoryController::class);
 // 4 routes  (index ,create ,store ,destory)
 
 Route::resource("/product" ,ProductController::class); 
+Route::prefix("/product/image")->group(function(){
+    Route::get("{product}/create" ,[ProductImageController::class ,"create"]);
+    Route::post("{product}" ,[ProductImageController::class ,"store"]);
+    Route::delete("{productImage}" ,[ProductImageController::class ,"destroy"]);
+});
 
 Route::resource("/supplier" ,SupplierController::class); 
 Route::resource("/contact_types" ,ContactController::class); 
@@ -67,3 +75,9 @@ Route::post("/lang" ,function (Request $request){
     
     return redirect()->back();
 });
+
+Route::get("/age/{age}" ,function (){
+    echo "Welcome";
+})->middleware(AgeCheck::class);
+
+Route::view("/error" ,"error")->name("error");

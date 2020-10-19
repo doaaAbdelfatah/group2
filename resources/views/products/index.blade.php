@@ -14,6 +14,7 @@
                             <th>Brand</th>                            
                             <th></th>
                             <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,9 @@
                             <td>{{$product->qty}}</td>
                             <td>{{$product->category->name}}</td>
                             <td>{{($product->brand)? $product->brand->name :""}}</td>
+                            <td style="width: 140px">
+                                <a class="btn btn-info btn-sm" href=" /product/image/{{$product->id}}/create" >Manage Image</a>
+                            </td>
                             <td style="width: 50px">
                                 <a class="btn btn-success btn-sm" href=" /product/{{$product->id}}/edit" >edit</a>
                             </td>
